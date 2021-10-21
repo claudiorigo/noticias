@@ -10,6 +10,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 export class NoticiasComponent implements OnInit {
 
   @Input() noticias: Article[] = [];
+  @Input() enFavoritos = false;
 
   //constructor() { }
   constructor(private iab: InAppBrowser) { }

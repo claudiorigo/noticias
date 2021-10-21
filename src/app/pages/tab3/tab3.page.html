@@ -1,11 +1,42 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Favoritos
+      Favoritos guardados {{dataLocalService.noticias.length}}
     </ion-title>
+    <ion-icon name="radio-button-on-outline" 
+              slot="end" 
+              color="{{status}}" 
+              class="ion-padding"
+              size="small"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-noticias [noticias]="dataLocalService.noticias"></app-noticias>
+  
+  
+  <ion-card *ngIf="dataLocalService.noticias.length === 0">
+    <ion-item>
+      <ion-icon name="book" slot="start" color="primary"></ion-icon>
+      <ion-label>No Hay Favoritos</ion-label>
+      <ion-button fill="outline" slot="end" routerLink="/">← Volver</ion-button>
+    </ion-item>
+  
+    <ion-card-content>
+      Puedes agregar favoritos en inicio de Noticias o por Categorias
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="md-card-bg" *ngIf="dataLocalService.noticias.length === 0">
+    <ion-card-header>
+      <img src="./../../../assets/favotitos.jpg" alt="">      
+    </ion-card-header>    
+    
+    <h2 class="md-card-title ion-text-center">Sin Favoritos</h2>
+    <h5 class="md-card-subtitle ion-text-center">Existen {{totalNoticias}} noticias</h5>
+  </ion-card>
+
+
+  <app-noticias [noticias]="dataLocalService.noticias" [enFavoritos]="true"></app-noticias>
+
+
 </ion-content>

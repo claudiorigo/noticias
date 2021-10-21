@@ -26,12 +26,14 @@ export class NoticiasService {
   }
 
   getTopHeadLines(){
-    this.headlinesPage ++;
+    this.headlinesPage ++;    
     //return this.http.get<RespuestaToHeadlines>(`https://newsapi.org/v2/top-headlines?country=us&apiKey=0f24a1a6fb144773bb7966794f63e18a`);
     return this.ejecutarQuery<RespuestaToHeadlines>(`/top-headlines?country=us&page=${this.headlinesPage}`);
+    
   }
 
   getTopHeadLinesCategoria(categoria: string){
+
     if (this.categoriaActual === categoria) {
       this.categoriaPage++;
     }else{

@@ -37,7 +37,7 @@ export class Tab2Page implements OnInit{
   // event? = con simbolo interrogación, porque es opcional
   cargarNoticias(categoria: string, event?){
     this.noticiasService.getTopHeadLinesCategoria(categoria).subscribe(resp =>{
-
+      
       if (resp.articles.length === 0) {
         event.target.disabled = true;
         return

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NoticiasService } from '../../services/noticias.service';
 import { Article } from '../../interfaces/interfaces';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -10,22 +11,31 @@ import { Article } from '../../interfaces/interfaces';
 export class Tab1Page implements OnInit{
 
   noticias: Article[] = [];
+  totalNoticias: number;
+  status: string;
 
   constructor(private noticiasService: NoticiasService) {}
 
 
   ngOnInit(){
-    this.cargarNoticias();
+    this.cargarNoticias();    
   }
 
   loadData(event){
     //console.log(event);
-    this.cargarNoticias(event);
+    this.cargarNoticias(event);    
   }
 
   cargarNoticias(event?){
     this.noticiasService.getTopHeadLines().subscribe(resp =>{
-      //console.log('noticias', resp);
+      //console.log(resp.totalResults);      
+      this.totalNoticias = resp.totalResults;
+      
+      if (resp.status === 'error'){
+        this.status = 'danger'
+      }else{
+        this.status = 'success'        
+      }
 
       if (resp.articles.length === 0) {
         event.target.disabled = true;
